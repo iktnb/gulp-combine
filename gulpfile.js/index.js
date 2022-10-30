@@ -1,4 +1,5 @@
-const task = require("./task");
+const task = require("./services");
+const { watcher, server, clear } = require("./helpers");
 
 global.$ = {
   gulp: require("gulp"),
@@ -8,19 +9,11 @@ global.$ = {
   app: require("./config/app.js"),
 };
 
-const watcher = () => {
-  $.gulp.watch($.path.html.watch, task.html);
-  $.gulp.watch($.path.scss.watch, task.scss);
-  $.gulp.watch($.path.js.watch, task.js);
-  $.gulp.watch($.path.img.watch, task.img);
-  $.gulp.watch($.path.font.watch, task.font);
-};
-
 const build = $.gulp.series(
-  task.clear,
+  clear,
   $.gulp.parallel(task.html, task.scss, task.js, task.img, task.font)
 );
 
-const dev = $.gulp.series(build, $.gulp.parallel(task.server, watcher));
+const dev = $.gulp.series(build, $.gulp.parallel(server, watcher));
 
 exports.default = $.app.production ? build : dev;

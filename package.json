@@ -5,7 +5,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "dev": "gulp",
+    "start": "gulp",
     "build": "gulp --production"
   },
   "author": "Yuriy Basiuk <iknowthatinobody@gmail.com>",
