@@ -15,6 +15,7 @@ const size = require("gulp-size");
 const shorthand = require("gulp-shorthand");
 const groupCssMediaQueries = require("gulp-group-css-media-queries");
 const webpcss = require("gulp-webp-css");
+const app = require("../config/app.js");
 
 // Css handler
 const css = () => {
@@ -34,7 +35,7 @@ const css = () => {
     .pipe(shorthand())
     .pipe(groupCssMediaQueries())
     .pipe(size({ title: "main.css" }))
-    .pipe(dest(path.css.dest), { sourcemaps: true })
+    .pipe(dest(path.css.dest), { sourcemaps: app.development })
     .pipe(
       rename({
         suffix: ".min",
@@ -42,7 +43,7 @@ const css = () => {
     )
     .pipe(csso())
     .pipe(size({ title: "main.min.css" }))
-    .pipe(dest(path.css.dest), { sourcemaps: true });
+    .pipe(dest(path.css.dest), { sourcemaps: app.development });
 };
 
 module.exports = css;

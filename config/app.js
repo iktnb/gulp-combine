@@ -1,14 +1,23 @@
+const production = process.argv.includes("--production");
+const dev = !production;
+
 module.exports = {
+  production: production,
+  development: dev,
+
   htmlmin: {
-    collapseWhitespace: true,
+    collapseWhitespace: production,
   },
   pug: {
-    pretty: true,
+    pretty: dev,
   },
   webpack: {
-    mode: "development",
+    mode: production ? "production" : "development",
   },
   imagemin: {
     verbose: true,
+  },
+  fonter: {
+    formats: ["ttf", "woff", "svg"],
   },
 };
